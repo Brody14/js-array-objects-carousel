@@ -65,3 +65,49 @@ section {
 .slide-body__title {
     margin-bottom: 10px;
 }
+
+/* TOOLBAR */
+
+.toolbar {
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    color: #074e1c;
+    gap: 10px;
+    padding: 15px;
+}
+
+.play:hover,
+.arrow-left:hover,
+.arrow-right:hover,
+.stop:hover {
+    transform: scale(1.2);
+}
+
+/* SUGGESTION */
+
+.suggest {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    height: 150px;
+    background-color: #fdfdfd;
+    border: 2px solid black;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.suggest__text {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.suggest__gif {
+    width: 100px;
+}

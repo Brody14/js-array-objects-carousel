@@ -45,15 +45,15 @@ const slides = [
 			"Ha realizzato il maggior numero di punti della storia delle Final Eight in una singola partita (37 - Final Eight 2020) e indovinate? Non giocava a Milano!",
 	},
 ];
-console.log(slides)
+//console.log(slides)
 
 slides.forEach((slide, i) => {
     
-    console.log(slide)
+    //console.log(slide)
 	const imgSrc = slide.imgSrc;
 	const title = slide.title;
 	const description = slide.description;
-    console.log(imgSrc, title, description)
+    //console.log(imgSrc, title, description)
 
     let slideEl = document.createElement("div");
     slideEl.classList.add("slide");
@@ -68,7 +68,11 @@ slides.forEach((slide, i) => {
     
     let slideBodyEl = document.createElement("div");
     slideBodyEl.classList.add("slide-body");
-    slideBodyEl.innerHTML += `<h2 class="slide-body__title">${title}</h2> <p class="slide-body__description">${description}</p>`;
+    slideBodyEl.innerHTML += 
+    `
+    <h2 class="slide-body__title">${title}</h2> 
+    <p class="slide-body__description">${description}</p>
+    `;
     
     slideEl.appendChild(slideBodyEl);
     
@@ -76,18 +80,37 @@ slides.forEach((slide, i) => {
 })
 
 
+//AUTOPLAY AUTOMATICO 
 let slideEl = document.querySelectorAll('.slide')
 let index = 0
-const arrowLeft = document.querySelector('.arrow-left')
-const arrowRight = document.querySelector('.arrow-right')
+const backwardEl = document.querySelector('.arrow-left')
+const forwardEl = document.querySelector('.arrow-right')
+const playEl = document.querySelector('.play')
+const stopEl = document.querySelector('.stop')
 
-arrowLeft.addEventListener('click', sliderAnticlockwise)
+let autoRunClockwise
+let autoRunAnticlockwise
 
-arrowRight.addEventListener('click', sliderClockwise)
+playEl.addEventListener('click', clockwiseAutoRun)
+stopEl.addEventListener('click', clearClockwise)
+stopEl.addEventListener('click', clearAnticlockwise)
+backwardEl.addEventListener('click', antiClockwiseAutoRun)
+forwardEl.addEventListener('click', clockwiseAutoRun)
 
-//FUNZIONI
+const suggestEl = document.querySelector('.suggest')
+suggestEl.style.display = 'none'
+
+const timer = setTimeout(function() {
+    suggestEl.style.display = 'flex'
+},3000)
+
+
+
+// //FUNZIONI
 
 function sliderAnticlockwise () {
+    stopTimer()
+    clearClockwise()
     let slideActive = slideEl[index]
     slideActive.classList.remove('active')
     if (index > 0) {
@@ -96,19 +119,101 @@ function sliderAnticlockwise () {
          index = slides.length - 1
        }
 
-       let slideNext = slideEl[index];
-       slideNext.classList.add("active");
+    let slideNext = slideEl[index];
+    slideNext.classList.add("active");
 }
 
 function sliderClockwise () {
+    stopTimer()
+    clearAnticlockwise()
     let slideActive = slideEl[index]
     slideActive.classList.remove('active')
     if (index < slides.length - 1) {
-            index += 1;
+        index += 1;
     } else { 
-         index = 0;
+        index = 0;
     }
     let slideNext = slideEl[index];
     slideNext.classList.add("active");
 }
 
+function clockwiseAutoRun () {
+    if(!autoRunClockwise) {
+        autoRunClockwise = setInterval(sliderClockwise, 3000)
+    }
+}
+
+function antiClockwiseAutoRun () {
+    if(!autoRunAnticlockwise) {
+        autoRunAnticlockwise = setInterval(sliderAnticlockwise, 3000)
+    }
+}
+
+function clearClockwise () {
+    clearInterval(autoRunClockwise)
+    autoRunClockwise = undefined
+}
+
+function clearAnticlockwise () {
+    clearInterval(autoRunAnticlockwise)
+    autoRunAnticlockwise = undefined
+}
+
+function stopTimer () {
+    suggestEl.style.display = 'none'
+    clearTimeout(timer)
+}
+
+
+
+//AUTOPLAY CHE PARTE DOPO 3 SEC SE NON CLICCHI I PULSANTI//
+
+// arrowLeft.addEventListener('click', sliderAnticlockwise)
+// arrowLeft.addEventListener('click', handleClick)
+
+// arrowRight.addEventListener('click', sliderClockwise)
+// arrowRight.addEventListener('click', handleClick)
+
+// startTimer()
+
+// //FUNZIONI
+
+// function sliderAnticlockwise () {
+//     let slideActive = slideEl[index]
+//     slideActive.classList.remove('active')
+//     if (index > 0) {
+//          index -= 1;
+//        } else { 
+//          index = slides.length - 1
+//        }
+
+//        let slideNext = slideEl[index];
+//        slideNext.classList.add("active");
+// }
+
+// function sliderClockwise () {
+//     let slideActive = slideEl[index]
+//     slideActive.classList.remove('active')
+//     if (index < slides.length - 1) {
+//             index += 1;
+//     } else { 
+//          index = 0;
+//     }
+//     let slideNext = slideEl[index];
+//     slideNext.classList.add("active");
+// }
+
+// function startTimer() {
+//     timer = setTimeout( function() {
+//         autoRun = setInterval(sliderClockwise, 3000)
+//     }, 3000);
+
+// }
+
+// function handleClick(e) {
+//     if (e.target.matches('.right') || e.target.matches('.left')) {
+//         clearTimeout(timer)
+//         clearInterval(autoRun);
+//         startTimer();
+//     }
+//   }
