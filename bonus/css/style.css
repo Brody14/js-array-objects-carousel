@@ -8,6 +8,15 @@ section {
     padding: 15px;
 }
 
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.carousel {
+    position: relative;
+}
+
 .slide {
     display: none;
 }
@@ -24,9 +33,6 @@ section {
 
 }
 
-.carousel {
-    position: relative;
-}
 
 .arrow {
     position: absolute;

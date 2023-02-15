@@ -102,7 +102,7 @@ suggestEl.style.display = 'none'
 
 const timer = setTimeout(function() {
     suggestEl.style.display = 'flex'
-},3000)
+},6000)
 
 
 
