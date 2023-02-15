@@ -45,15 +45,15 @@ const slides = [
 			"Ha realizzato il maggior numero di punti della storia delle Final Eight in una singola partita (37 - Final Eight 2020) e indovinate? Non giocava a Milano!",
 	},
 ];
-console.log(slides)
+//console.log(slides)
 
-slides.forEach((slide, i) => {
+for(let i = 0; i < slides.length; i++) {
     
-    console.log(slide)
+    let slide = slides[i]
 	const imgSrc = slide.imgSrc;
 	const title = slide.title;
 	const description = slide.description;
-    console.log(imgSrc, title, description)
+
 
     let slideEl = document.createElement("div");
     slideEl.classList.add("slide");
@@ -68,26 +68,34 @@ slides.forEach((slide, i) => {
     
     let slideBodyEl = document.createElement("div");
     slideBodyEl.classList.add("slide-body");
-    slideBodyEl.innerHTML += `<h2 class="slide-body__title">${title}</h2> <p class="slide-body__description">${description}</p>`;
+    slideBodyEl.innerHTML += 
+    `
+    <h2 class="slide-body__title">${title}</h2> 
+    <p class="slide-body__description">${description}</p>
+    `;
     
     slideEl.appendChild(slideBodyEl);
     
     carouselEl.appendChild(slideEl);
-})
+}
+
 
 
 let slideEl = document.querySelectorAll('.slide')
 let index = 0
+
 const arrowLeft = document.querySelector('.arrow-left')
 const arrowRight = document.querySelector('.arrow-right')
 
-arrowLeft.addEventListener('click', sliderAnticlockwise)
+arrowLeft.addEventListener('click', anticlockwise)
+arrowRight.addEventListener('click', clockwise)
 
-arrowRight.addEventListener('click', sliderClockwise)
 
-//FUNZIONI
 
-function sliderAnticlockwise () {
+// //FUNZIONI
+
+function anticlockwise () {
+  
     let slideActive = slideEl[index]
     slideActive.classList.remove('active')
     if (index > 0) {
@@ -96,19 +104,20 @@ function sliderAnticlockwise () {
          index = slides.length - 1
        }
 
-       let slideNext = slideEl[index];
-       slideNext.classList.add("active");
+    let slideNext = slideEl[index];
+    slideNext.classList.add("active");
 }
 
-function sliderClockwise () {
+function clockwise () {
     let slideActive = slideEl[index]
     slideActive.classList.remove('active')
     if (index < slides.length - 1) {
-            index += 1;
+        index += 1;
     } else { 
-         index = 0;
+        index = 0;
     }
     let slideNext = slideEl[index];
     slideNext.classList.add("active");
 }
+
 

@@ -4,9 +4,25 @@
     box-sizing: border-box;
 }
 
+img {
+    max-width: 100%;
+    display: block;
+}
+
 section {
     padding: 15px;
 }
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.carousel {
+    position: relative;
+}
+
+/* SLIDE */
 
 .slide {
     display: none;
@@ -22,10 +38,6 @@ section {
     object-fit: contain;
     object-position: center;
 
-}
-
-.carousel {
-    position: relative;
 }
 
 .arrow {
@@ -65,3 +77,4 @@ section {
 .slide-body__title {
     margin-bottom: 10px;
 }
+
