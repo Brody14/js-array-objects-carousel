@@ -45,30 +45,36 @@ const slides = [
 			"Ha realizzato il maggior numero di punti della storia delle Final Eight in una singola partita (37 - Final Eight 2020) e indovinate? Non giocava a Milano!",
 	},
 ];
+console.log(slides)
 
-for (let i = 0; i < slides.length; i++) {
-	let slide = slides[i];
+slides.forEach((slide, i) => {
+    
+    console.log(slide)
 	const imgSrc = slide.imgSrc;
 	const title = slide.title;
 	const description = slide.description;
+    console.log(imgSrc, title, description)
 
-	let slideEl = document.createElement("div");
-	slideEl.classList.add("slide");
+    let slideEl = document.createElement("div");
+    slideEl.classList.add("slide");
 
-	if (i === 0) {
-		slideEl.classList.add("active");
-	}
 
-	slideEl.innerHTML += `<img src=${imgSrc}>`;
+    if (i === 0) {
+        slideEl.classList.add("active");
+    }
+    
 
-	let slideBodyEl = document.createElement("div");
-	slideBodyEl.classList.add("slide-body");
-	slideBodyEl.innerHTML += `<h2 class="slide-body__title">${title}</h2> <p class="slide-body__description">${description}</p>`;
+    slideEl.innerHTML += `<img src=${imgSrc}>`;
+    
+    let slideBodyEl = document.createElement("div");
+    slideBodyEl.classList.add("slide-body");
+    slideBodyEl.innerHTML += `<h2 class="slide-body__title">${title}</h2> <p class="slide-body__description">${description}</p>`;
+    
+    slideEl.appendChild(slideBodyEl);
+    
+    carouselEl.appendChild(slideEl);
+})
 
-	slideEl.appendChild(slideBodyEl);
-
-	carouselEl.appendChild(slideEl);
-}
 
 let slideEl = document.querySelectorAll('.slide')
 let index = 0
