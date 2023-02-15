@@ -26,7 +26,7 @@ const slides = [
 
 	{
 		imgSrc: "./img/04.jpg",
-		title: "Sassari - Pesaro, Finale Eight 2021",
+		title: "Sassari - Pesaro, Final Eight 2021",
 		description:
 			"La partita (stupenda) con il punteggio più alto nella storia delle Final Eight con 225 punti totali",
 	},
@@ -35,7 +35,7 @@ const slides = [
 		imgSrc: "./img/05.jpg",
 		title: "Ettore Messina",
 		description:
-			"L'allenatore che ha vinto più coppe nella storia, nel 7 (il fatto che alleni Milano è solo un caso)",
+			"L'allenatore che ha vinto più coppe nella storia, 7 (il fatto che alleni Milano è solo un caso)",
 	},
 
 	{
@@ -63,9 +63,46 @@ for (let i = 0; i < slides.length; i++) {
 
 	let slideBodyEl = document.createElement("div");
 	slideBodyEl.classList.add("slide-body");
-	slideBodyEl.innerHTML += `<h2>${title}</h2> <p>${description}</p>`;
+	slideBodyEl.innerHTML += `<h2 class="slide-body__title">${title}</h2> <p class="slide-body__description">${description}</p>`;
 
 	slideEl.appendChild(slideBodyEl);
 
 	carouselEl.appendChild(slideEl);
 }
+
+let slideEl = document.querySelectorAll('.slide')
+let index = 0
+const arrowLeft = document.querySelector('.arrow-left')
+const arrowRight = document.querySelector('.arrow-right')
+
+arrowLeft.addEventListener('click', sliderAnticlockwise)
+
+arrowRight.addEventListener('click', sliderClockwise)
+
+//FUNZIONI
+
+function sliderAnticlockwise () {
+    let slideActive = slideEl[index]
+    slideActive.classList.remove('active')
+    if (index > 0) {
+         index -= 1;
+       } else { 
+         index = slides.length - 1
+       }
+
+       let slideNext = slideEl[index];
+       slideNext.classList.add("active");
+}
+
+function sliderClockwise () {
+    let slideActive = slideEl[index]
+    slideActive.classList.remove('active')
+    if (index < slides.length - 1) {
+            index += 1;
+    } else { 
+         index = 0;
+    }
+    let slideNext = slideEl[index];
+    slideNext.classList.add("active");
+}
+
